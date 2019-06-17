@@ -1,12 +1,14 @@
 import requests
 import threading
+import os
 
 doorIsOpen = False
+
 
 def checkDoor():
     threading.Timer(5.0, checkDoor).start()
     r = requests.get("http://fius.informatik.uni-stuttgart.de/isOpen.php")
-    
+
     if r.text == "open":
         setDoorOpen(True)
     else:
@@ -18,10 +20,12 @@ def setDoorOpen(state):
 
     if not(state == doorIsOpen):
         doorIsOpen = state
+        ceilingIP = os.environ['LED_CEILING']
         if doorIsOpen:
-            requests.post("http://192.168.212.183?doorOpen")
+            requests.post("http://"+ceilingIP+"?doorOpen")
         else:
-            requests.post("http://192.168.212.183?doorClosed")
+            requests.post("http://"+ceilingIP+"?doorClosed")
     print(doorIsOpen)
+
 
 checkDoor()
