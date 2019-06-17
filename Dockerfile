@@ -1,8 +1,7 @@
-FROM python:3
+FROM python:3-alpine
 
 ADD doorControll.py /
 
 RUN python3 -m pip install requests
-RUN python3 -m pip install threading
 
 CMD [ "python", "./doorControll.py" ]
