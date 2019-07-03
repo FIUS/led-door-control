@@ -1,3 +1,5 @@
+#!/usr/bin/env -S python3 -u
+
 import requests
 import os
 import time
