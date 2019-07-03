@@ -22,13 +22,13 @@ def setDoorOpen(state):
             doorIsOpen = state
             ceilingIP = os.environ['LED_CEILING']
             if doorIsOpen:
+                print("Door was opened")
                 requests.post("http://"+ceilingIP+"?doorOpen")
             else:
+                print("Door was closed")
                 requests.post("http://"+ceilingIP+"?doorClosed")
         except:
             print("Error")
-    print(doorIsOpen)
-
 
 while True:
     checkDoor()
