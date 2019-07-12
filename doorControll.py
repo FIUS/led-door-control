@@ -7,7 +7,7 @@ import time
 doorIsOpen = False
 
 def checkDoor():
-    r = requests.get("http://fius.informatik.uni-stuttgart.de/isOpen.php")
+    r = requests.get("http://fius.informatik.uni-stuttgart.de/isOpen.php", timeout=3)
     try:
         if r.text == "open":
             setDoorOpen(True)
@@ -25,10 +25,10 @@ def setDoorOpen(state):
             ceilingIP = os.environ['LED_CEILING']
             if doorIsOpen:
                 print("Door was opened")
-                requests.post("http://"+ceilingIP+"?doorOpen")
+                requests.post("http://"+ceilingIP+"?doorOpen", timeout=5)
             else:
                 print("Door was closed")
-                requests.post("http://"+ceilingIP+"?doorClosed")
+                requests.post("http://"+ceilingIP+"?doorClosed", timeout=5)
         except:
             print("Error")
 
