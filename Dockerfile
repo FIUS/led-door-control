@@ -4,4 +4,4 @@ ADD doorControll.py /
 
 RUN python3 -m pip install requests
 
-CMD [ "python", "./doorControll.py" ]
+CMD [ "python", "-u", "./doorControll.py" ]

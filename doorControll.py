@@ -1,3 +1,6 @@
+
+#!/usr/bin/env -S python3 -u
+
 import requests
 import os
 import time
@@ -22,15 +25,15 @@ def setDoorOpen(state):
             doorIsOpen = state
             ceilingIP = os.environ['LED_CEILING']
             if doorIsOpen:
+                print("Door was opened")
                 requests.post("http://"+ceilingIP+"?doorOpen")
                 requests.post("http://led-dishwasher?doorOpen")
             else:
+                print("Door was closed")
                 requests.post("http://"+ceilingIP+"?doorClosed")
                 requests.post("http://led-dishwasher?doorClosed")
         except:
             print("Error")
-    print(doorIsOpen)
-
 
 while True:
     checkDoor()
