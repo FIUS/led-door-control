@@ -23,14 +23,15 @@ def setDoorOpen(state):
     if not(state == doorIsOpen):
         doorIsOpen = state
         ceilingIP = os.environ['LED_CEILING']
+        dishwasherIP = os.environ['LED_DISHWASHER']
         if doorIsOpen:
             print("Door was opened")
             doCheckedPostRequest("http://"+ceilingIP+"?doorOpen")
-            doCheckedPostRequest("http://led-dishwasher?doorOpen")
+            doCheckedPostRequest("http://"+dishwasherIP+"?doorOpen")
         else:
             print("Door was closed")
             doCheckedPostRequest("http://"+ceilingIP+"?doorClosed")
-            doCheckedPostRequest("http://led-dishwasher?doorClosed")
+            doCheckedPostRequest("http://"+dishwasherIP+"?doorClosed")
 
 def doCheckedPostRequest(url):
     try:
