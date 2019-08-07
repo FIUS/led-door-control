@@ -14,7 +14,8 @@ def checkDoor():
             setDoorOpen(True)
         else:
             setDoorOpen(False)
-    except e:
+    except:
+        e = sys.exc_info()[0]
         print("Error: " + str(e))
 
 def setDoorOpen(state):
@@ -32,7 +33,8 @@ def setDoorOpen(state):
                 print("Door was closed")
                 requests.post("http://"+ceilingIP+"?doorClosed")
                 requests.post("http://led-dishwasher?doorClosed")
-        except e:
+        except:
+            e = sys.exc_info()[0]
             print("Error: " + str(e))
 
 while True:
