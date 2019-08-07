@@ -8,14 +8,14 @@ import time
 doorIsOpen = False
 
 def checkDoor():
-    r = requests.get("http://fius.informatik.uni-stuttgart.de/isOpen.php")
     try:
+        r = requests.get("http://fius.informatik.uni-stuttgart.de/isOpen.php")
         if r.text == "open":
             setDoorOpen(True)
         else:
             setDoorOpen(False)
-    except:
-        print("Error")
+    except e:
+        print("Error: " + str(e))
 
 def setDoorOpen(state):
     global doorIsOpen
@@ -32,8 +32,8 @@ def setDoorOpen(state):
                 print("Door was closed")
                 requests.post("http://"+ceilingIP+"?doorClosed")
                 requests.post("http://led-dishwasher?doorClosed")
-        except:
-            print("Error")
+        except e:
+            print("Error: " + str(e))
 
 while True:
     checkDoor()
