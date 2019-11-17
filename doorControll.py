@@ -26,16 +26,22 @@ def setDoorOpen(state):
         dishwasherIP = os.environ['LED_DISHWASHER']
         if doorIsOpen:
             print("Door was opened")
-            doCheckedPostRequest("http://"+ceilingIP+"?doorOpen")
+            doCheckedPostRequestWithBody("http://"+ceilingIP+"/animationType",1)
             doCheckedPostRequest("http://"+dishwasherIP+"?doorOpen")
         else:
             print("Door was closed")
-            doCheckedPostRequest("http://"+ceilingIP+"?doorClosed")
-            doCheckedPostRequest("http://"+dishwasherIP+"?doorClosed")
+            doCheckedPostRequestWithBody("http://"+ceilingIP+"/animationType",0)
+            doCheckedPostRequest("http://"+dishwasherIP+"/")
 
 def doCheckedPostRequest(url):
     try:
         requests.post(url)
+    except Exception as e:
+        print("Error in post: ", e)
+
+def doCheckedPostRequestWithBody(url,state):
+    try:
+        requests.post(url, json={"type": state})
     except Exception as e:
         print("Error in post: ", e)
         
