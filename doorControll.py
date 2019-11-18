@@ -31,7 +31,7 @@ def setDoorOpen(state):
         else:
             print("Door was closed")
             doCheckedPostRequestWithBody("http://"+ceilingIP+"/animationType",0)
-            doCheckedPostRequest("http://"+dishwasherIP+"/")
+            doCheckedPostRequest("http://"+dishwasherIP+"/?doorClosed")
 
 def doCheckedPostRequest(url):
     try:
