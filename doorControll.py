@@ -10,7 +10,7 @@ doorIsOpen = False
 def checkDoor():
     try:
         r = requests.get("http://fius.informatik.uni-stuttgart.de/isOpen.php")
-        if r.text == "open":
+        if "open" in r.text:
             setDoorOpen(True)
         else:
             setDoorOpen(False)
